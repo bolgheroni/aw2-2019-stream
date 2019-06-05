@@ -1,14 +1,14 @@
 <?php
 $GLOBALS['caminhoUsuarios'] = $_SERVER['DOCUMENT_ROOT']. "/aw2-2019-stream" . "/back/model/". "usuarios.csv";
 
-$GLOBALS['adicionar'] = function($ar){
+$GLOBALS['adicionarUsuario'] = function($ar){
     $f = fopen($GLOBALS['caminhoUsuarios'], 'a');
     fputcsv($f, $ar);
     fclose($f);
     return true;
 };
 
-$GLOBALS['listar'] = function(){
+$GLOBALS['listarUsuarios'] = function(){
     $f = fopen($GLOBALS['caminhoUsuarios'], 'r');
     $retorno = array();
     $isLineOne = true;
@@ -23,11 +23,11 @@ $GLOBALS['listar'] = function(){
     return $retorno;
 };
 
-function adicionar($id, $username, $senha, $ehAdm){
+function adicionarUsuario($id, $username, $senha, $ehAdm){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
-        $register_exists = buscarPorId($id) != null;
+        $register_exists = buscarUsuarioPorId($id) != null;
         if(!$register_exists){
-            return $GLOBALS['adicionar'](array($id, $username, $senha, $ehAdm));
+            return $GLOBALS['adicionarUsuario'](array($id, $username, $senha, $ehAdm));
         }else{
             return false;
         }
@@ -35,14 +35,14 @@ function adicionar($id, $username, $senha, $ehAdm){
         $f = fopen($GLOBALS['caminhoUsuarios'], 'a');
         fclose($f);
         $campos = array('id', 'username', 'senha', 'ehAdm');
-        $GLOBALS['adicionar']($campos);
-        return $GLOBALS['adicionar'](array($id, $username, $senha, $ehAdm));
+        $GLOBALS['adicionarUsuario']($campos);
+        return $GLOBALS['adicionarUsuario'](array($id, $username, $senha, $ehAdm));
     }
 }
 
-function buscarPorId($id){
+function buscarUsuarioPorId($id){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
-        foreach($GLOBALS['listar']() as $linha){
+        foreach($GLOBALS['listarUsuarios']() as $linha){
             if($linha[0] == $id){
                 return array("id" => $linha[0], "username", $linha[1], "senha" => $linha[2], "isAdm" => $linha[3]);
             }
@@ -55,7 +55,7 @@ function buscarPorId($id){
 
 function listarUsuarios(){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
-        return $GLOBALS['listar']();
+        return $GLOBALS['listarUsuarios']();
     }else{
         return false;
     }
@@ -63,8 +63,8 @@ function listarUsuarios(){
 
 
 return [
-    'adicionarUsuario' => 'adicionar',
+    'adicionarUsuario' => 'adicionarUsuario',
     'listarUsuarios' => 'listarUsuarios', 
-    'buscarUsuarioPorId' => 'buscarPorId'
+    'buscarUsuarioPorId' => 'buscarUsuarioPorId'
 ]
 ?>
