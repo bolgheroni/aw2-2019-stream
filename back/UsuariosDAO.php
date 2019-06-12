@@ -27,7 +27,7 @@ function adicionarUsuario($id, $username, $senha, $ehAdm){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         $register_exists = buscarUsuarioPorId($id) != null;
         if(!$register_exists){
-            return $GLOBALS['adicionarUsuario'](array($id, $username, $senha, $ehAdm));
+            return $GLOBALS['adicionarUsuario'](array($id,$email, $username, $senha, $ehAdm));
         }else{
             return false;
         }
@@ -36,7 +36,7 @@ function adicionarUsuario($id, $username, $senha, $ehAdm){
         fclose($f);
         $campos = array('id', 'username', 'senha', 'ehAdm');
         $GLOBALS['adicionarUsuario']($campos);
-        return $GLOBALS['adicionarUsuario'](array($id, $username, $senha, $ehAdm));
+        return $GLOBALS['adicionarUsuario'](array($id, $email, $username, $senha, $ehAdm));
     }
 }
 
@@ -44,7 +44,7 @@ function buscarUsuarioPorId($id){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         foreach($GLOBALS['listarUsuarios']() as $linha){
             if($linha[0] == $id){
-                return array("id" => $linha[0], "username", $linha[1], "senha" => $linha[2], "isAdm" => $linha[3]);
+                return array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
             }
         }
         return false;
@@ -61,10 +61,24 @@ function listarUsuarios(){
     }
 }
 
+function autenticarUsuario($username, $senha){
+    if(file_exists($GLOBALS['caminhoUsuarios'])){
+        foreach($GLOBALS['listarUsuarios']() as $linha){
+            if($linha[1] == $email && $linha[3] == $senha){
+                return array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
+            }
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
+
 
 return [
     'adicionarUsuario' => 'adicionarUsuario',
     'listarUsuarios' => 'listarUsuarios', 
-    'buscarUsuarioPorId' => 'buscarUsuarioPorId'
+    'buscarUsuarioPorId' => 'buscarUsuarioPorId',
+    'autenticarUsuario' => 'autenticarUsuario'
 ]
 ?>
