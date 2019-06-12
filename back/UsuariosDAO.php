@@ -7,6 +7,22 @@ $GLOBALS['adicionarUsuario'] = function($ar){
     fclose($f);
     return true;
 };
+$GLOBALS['adicionarUsuarios'] = function($ar){
+    $f = fopen($GLOBALS['caminhoUsuarios'], 'a');
+    foreach($ar as $usuario){
+        fputcsv($f, $usuario);
+    }
+    fclose($f);
+    return true;
+};
+
+$GLOBALS['limparUsuarios'] = function(){
+    $f = fopen($GLOBALS['caminhoUsuarios'], 'w');
+    $campos = array('id', 'email', 'username', 'senha', 'ehAdm');
+    fputcsv($f, $campos);
+    fclose($f);
+    return true;
+};
 
 $GLOBALS['listarUsuarios'] = function(){
     $f = fopen($GLOBALS['caminhoUsuarios'], 'r');
@@ -25,8 +41,8 @@ $GLOBALS['listarUsuarios'] = function(){
 
 function adicionarUsuario($id, $username, $senha, $ehAdm){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
-        $register_exists = buscarUsuarioPorId($id) != null;
-        if(!$register_exists){
+        $registro_existe = buscarUsuarioPorId($id) != null;
+        if(!$registro_existe){
             return $GLOBALS['adicionarUsuario'](array($id,$email, $username, $senha, $ehAdm));
         }else{
             return false;
@@ -55,7 +71,10 @@ function buscarUsuarioPorId($id){
 
 function listarUsuarios(){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
-        return $GLOBALS['listarUsuarios']();
+        $retorno = array();
+        foreach($GLOBALS['listarUsuarios']() as $linha){
+            $retorno[] = array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
+        }
     }else{
         return false;
     }
@@ -66,6 +85,52 @@ function autenticarUsuario($username, $senha){
         foreach($GLOBALS['listarUsuarios']() as $linha){
             if($linha[1] == $email && $linha[3] == $senha){
                 return array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
+            }
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
+
+function adicionarVetorUsuarios($vetor){
+    foreach($vetor as $user){
+        $registro = array($user['id'], $user['email'], $user['username'], $user['senha'], $user['ehAdm']);
+        $retorno = $GLOBALS['adicionarUsuario']($registro);
+        if(!$retorno){
+            return false;
+        }
+    }  
+    return true;  
+
+}
+
+function removerUsuario($id){
+    if(file_exists($GLOBALS['caminhoUsuarios'])){
+        $registros = $GLOBALS['listarUsuarios']();
+        foreach($registros as $indice => $linha){
+            if($linha[0] == $id){
+                \array_splice($registros, 1, $indice);
+                $GLOBALS['limparUsuarios']();
+                return $GLOBALS['adicionarUsuarios']($registros);
+            }
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
+
+function editarUsuario($id, $username, $senha, $ehAdm){
+    if(file_exists($GLOBALS['caminhoUsuarios'])){
+        $registros = $GLOBALS['listarUsuarios']();
+        foreach($registros as $indice => $linha){
+            if($linha[0] == $id){
+                $registro = array($id,$email,$username,$senha,$isAdm);
+                $registros[$linha] = $registro;
+                $GLOBALS['limparUsuarios']();
+                $GLOBALS['adicionarUsuarios']($registros);
+                return true;
             }
         }
         return false;
