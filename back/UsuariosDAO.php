@@ -39,10 +39,11 @@ $GLOBALS['listarUsuarios'] = function(){
     return $retorno;
 };
 
-function adicionarUsuario($id, $email, $username, $senha, $ehAdm){
+function adicionarUsuario($email, $username, $senha, $ehAdm){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
-        $registro_existe = buscarUsuarioPorId($id) != null;
+        $registro_existe = buscarUsuarioPorEmail($email) != null;
         if(!$registro_existe){
+            $id = sizeof(listarUsuarios()) +1;
             return $GLOBALS['adicionarUsuario'](array($id,$email, $username, $senha, $ehAdm));
         }else{
             return false;
@@ -52,7 +53,7 @@ function adicionarUsuario($id, $email, $username, $senha, $ehAdm){
         fclose($f);
         $campos = array('id','email', 'username', 'senha', 'ehAdm');
         $GLOBALS['adicionarUsuario']($campos);
-        return $GLOBALS['adicionarUsuario'](array($id, $email, $username, $senha, $ehAdm));
+        return $GLOBALS['adicionarUsuario'](array('1', $email, $username, $senha, $ehAdm));
     }
 }
 
@@ -61,6 +62,18 @@ function buscarUsuarioPorId($id){
         foreach($GLOBALS['listarUsuarios']() as $linha){
             if($linha[0] == $id){
                 return array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
+            }
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
+function buscarUsuarioPorEmail($email){
+    if(file_exists($GLOBALS['caminhoUsuarios'])){
+        foreach(listarUsuarios() as $usuario){
+            if($usuario['email'] == $email){
+                return $usuario;
             }
         }
         return false;

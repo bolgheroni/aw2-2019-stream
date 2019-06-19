@@ -24,10 +24,11 @@ $GLOBALS['listarVideos'] = function(){
     return $retorno;
 };
 
-function adicionarVideo($id, $nome, $link, $visualizacoes, $idCategoria){
+function adicionarVideo($nome, $link, $visualizacoes, $idCategoria){
     if(file_exists($GLOBALS['caminhoVideos'])){
-        $register_exists = buscarVideoPorId($id) != null;
+        $register_exists = buscarVideoPorNome($nome) != null;
         if(!$register_exists){
+            $id = sizeof(listarVideos()) +1;
             return $GLOBALS['adicionarVideo'](array($id, $nome, $link, $visualizacoes, $idCategoria));
         }else{
             return false;
@@ -37,19 +38,38 @@ function adicionarVideo($id, $nome, $link, $visualizacoes, $idCategoria){
         fclose($f);
         $campos = array("id", 'nome', 'link', 'visualizacoes', 'idCategoria');
         $GLOBALS['adicionarVideo']($campos);
-        return $GLOBALS['adicionarVideo'](array($id, $nome, $link, $visualizacoes, $idCategoria));
+        return $GLOBALS['adicionarVideo'](array('1', $nome, $link, $visualizacoes, $idCategoria));
     }
 }
 
 
-function buscarVideoPorId($id){
+function buscarVideoPorNome($nome){
     if(file_exists($GLOBALS['caminhoVideos'])){
-        foreach($GLOBALS['listarVideos']() as $linha){
-            if($linha[0] == $id){
-                $idCategoria = $linha[4];
+        foreach(listarVideos() as $video){
+            if($video['nome'] == $nome){
+                $idCategoria = $video['idCategoria'];
                 $nomeCategoria = $GLOBALS['categorias']['buscarCategoriaPorId']($idCategoria);
                 if($nomeCategoria){
-                    return array("id" => $linha[0], "nome" => $linha[1], "link" => $linha[2], "visualizacoes" => $linha[3], "nomeCategoria" => $nomeCategoria );
+                    $video['nomeCategoria']= $nomeCategoria;
+                    return $video;
+                }
+                return false;
+            }
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
+function buscarVideoPorId($id){
+    if(file_exists($GLOBALS['caminhoVideos'])){
+        foreach(listarVideos() as $video){
+            if($video['id'] == $id){
+                $idCategoria = $video['idCategoria'];
+                $nomeCategoria = $GLOBALS['categorias']['buscarCategoriaPorId']($idCategoria);
+                if($nomeCategoria){
+                    $video['nomeCategoria']= $nomeCategoria;
+                    return $video;
                 }
                 return false;
             }
