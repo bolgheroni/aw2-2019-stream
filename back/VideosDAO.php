@@ -27,7 +27,6 @@ $GLOBALS['listarVideos'] = function(){
 function adicionarVideo($id, $nome, $link, $visualizacoes, $idCategoria){
     if(file_exists($GLOBALS['caminhoVideos'])){
         $register_exists = buscarVideoPorId($id) != null;
-        echo "EXISTS $register_exists";
         if(!$register_exists){
             return $GLOBALS['adicionarVideo'](array($id, $nome, $link, $visualizacoes, $idCategoria));
         }else{
@@ -63,7 +62,12 @@ function buscarVideoPorId($id){
 
 function listarVideos(){
     if(file_exists($GLOBALS['caminhoVideos'])){
-        return $GLOBALS['listarVideos']();
+        $retorno = array();
+        foreach($GLOBALS['listarVideos']() as $linha){
+            // id,nome,link,visualizacoes,idCategoria
+            $retorno[] = array("id" => $linha[0], "nome" => $linha[1],"link" => $linha[2], "visualizacoes" => $linha[3], "idCategoria" => $linha[4]);
+        }
+        return $retorno;
     }else{
         return false;
     }

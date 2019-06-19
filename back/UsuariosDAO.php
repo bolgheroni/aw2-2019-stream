@@ -39,7 +39,7 @@ $GLOBALS['listarUsuarios'] = function(){
     return $retorno;
 };
 
-function adicionarUsuario($id, $username, $senha, $ehAdm){
+function adicionarUsuario($id, $email, $username, $senha, $ehAdm){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         $registro_existe = buscarUsuarioPorId($id) != null;
         if(!$registro_existe){
@@ -75,12 +75,13 @@ function listarUsuarios(){
         foreach($GLOBALS['listarUsuarios']() as $linha){
             $retorno[] = array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
         }
+        return $retorno;
     }else{
         return false;
     }
 }
 
-function autenticarUsuario($username, $senha){
+function autenticarUsuario($email, $senha){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         foreach($GLOBALS['listarUsuarios']() as $linha){
             if($linha[1] == $email && $linha[3] == $senha){
