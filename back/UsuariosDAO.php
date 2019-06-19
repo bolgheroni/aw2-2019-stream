@@ -137,13 +137,13 @@ function removerUsuario($id){
     }
 }
 
-function editarUsuario($id, $username, $senha, $ehAdm){
+function editarUsuario($id, $email, $username, $senha, $ehAdm){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         $registros = $GLOBALS['listarUsuarios']();
         foreach($registros as $indice => $linha){
             if($linha[0] == $id){
-                $registro = array($id,$email,$username,$senha,$isAdm);
-                $registros[$linha] = $registro;
+                $registro = array($id,$email,$username,$senha,$ehAdm);
+                $registros[$indice] = $registro;
                 $GLOBALS['limparUsuarios']();
                 $GLOBALS['adicionarUsuarios']($registros);
                 return true;
@@ -156,10 +156,12 @@ function editarUsuario($id, $username, $senha, $ehAdm){
 }
 
 
+
 return [
     'adicionarUsuario' => 'adicionarUsuario',
     'listarUsuarios' => 'listarUsuarios', 
     'buscarUsuarioPorId' => 'buscarUsuarioPorId',
-    'autenticarUsuario' => 'autenticarUsuario'
+    'autenticarUsuario' => 'autenticarUsuario',
+    'editarUsuario' => 'editarUsuario',
 ]
 ?>

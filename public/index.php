@@ -11,6 +11,8 @@ echo "<br>";
 echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345678")).'<br>';
 echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345671")).'<br>';
 echo "<br>";
+echo $userDao['editarUsuario']('1',"joaoao@gmail.com", "joao", "12345678", 'true') ? 'true':'false' .'<br>';
+echo json_encode($userDao['listarUsuarios']()).'<br>';
 
 
 
