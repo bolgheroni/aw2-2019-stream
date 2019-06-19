@@ -50,7 +50,7 @@ function adicionarUsuario($id, $email, $username, $senha, $ehAdm){
     }else{
         $f = fopen($GLOBALS['caminhoUsuarios'], 'a');
         fclose($f);
-        $campos = array('id', 'username', 'senha', 'ehAdm');
+        $campos = array('id','email', 'username', 'senha', 'ehAdm');
         $GLOBALS['adicionarUsuario']($campos);
         return $GLOBALS['adicionarUsuario'](array($id, $email, $username, $senha, $ehAdm));
     }
@@ -83,9 +83,11 @@ function listarUsuarios(){
 
 function autenticarUsuario($email, $senha){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
-        foreach($GLOBALS['listarUsuarios']() as $linha){
-            if($linha[1] == $email && $linha[3] == $senha){
-                return array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
+        foreach(listarUsuarios() as $usuario){
+            if($usuario['email'] == $email && $usuario['senha'] == $senha){
+                setcookie('userName', $usuario['username']);                
+                setcookie('userId', $usuario['id']);                
+                return $usuario;
             }
         }
         return false;

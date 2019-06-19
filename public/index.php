@@ -10,6 +10,9 @@ echo json_encode($userDao['buscarUsuarioPorId']('12')).'<br>';
 echo "<br>";
 echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345678")).'<br>';
 echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345671")).'<br>';
+echo "<br>";
+
+
 
 echo "VIDEOS <br><br>";
 echo $videosDao['adicionarVideo']('12', "Lá vem o Mmarcos", "https://www.youtube.com/watch?v=yazkNHqoyZ8", '0', "4") ? 'true':'false';
