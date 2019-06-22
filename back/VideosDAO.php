@@ -156,6 +156,20 @@ function editarVideo($id, $nome, $link, $visualizacoes, $idCategoria){
     }
 }
 
+function videosPorCategoria($idCategoria){
+    if(file_exists($GLOBALS['caminhoVideos'])){
+        $videos = array();
+        foreach(listarVideos() as $video){
+            if($video['idCategoria'] == $idCategoria){
+                $videos[] = $video;
+            }
+        }
+        return $videos;
+    }else{
+        return false;
+    }
+}
+
 return [
     'adicionarVideo' => 'adicionarVideo',
     'listarVideos' => 'listarVideos', 
