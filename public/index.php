@@ -1,116 +1,58 @@
-<?php  
-$userDao = require '../back/UsuariosDAO.php' ;
-$videosDao = require '../back/VideosDAO.php' ;
-$favoritosDao = require '../back/FavoritosDAO.php' ;
-$assistirMaisTardeDao = require '../back/AssistirMaisTardeDAO.php' ;
-
-echo "USUARIOS <br><br>";
-echo "ADICIONAR <br>";
-echo $userDao['adicionarUsuario']("joao@gmail.com", "joao", "12345678", 'true') ? 'true':'false' .'<br>';
-echo $userDao['adicionarUsuario']("joana@gmail.com", "joana", "12345672", 'false') ? 'true':'false'.'<br>';
-echo "LISTAR <br>";
-echo json_encode($userDao['listarUsuarios']()).'<br>';
-echo "BUSCAR <br>";
-echo json_encode($userDao['buscarUsuarioPorId']("1")).'<br>';
-echo "<br>";
-echo "EDITAR <br>";
-echo json_encode($userDao['editarUsuario']("1","joaoooo@gmail.com", "joao", "12345678", 'true' )).'<br>';
-echo "<br>";
-echo "RESULTADO EDICAO <br>";
-echo json_encode($userDao['buscarUsuarioPorId']("1")).'<br>';
-echo "<br>";
-echo "REMOVER <br>";
-echo json_encode($userDao['removerUsuario']("2")).'<br>';
-echo "<br>";
-echo "RESULTADO REMOCAO <br>";
-echo json_encode($userDao['listarUsuarios']()).'<br>';
-echo "<br>";
-echo "AUTENTICAR <br>";
-echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345678")).'<br>';
-echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345671")).'<br>';
-
-echo "<br><br>VIDEOS <br><br>";
-echo "ADICIONAR <br>";
-echo $videosDao['adicionarVideo']("Lá vem o Mmarcos", "https://www.youtube.com/watch?v=yazkNHqoyZ8", '2', "4") ? 'true':'false';
-echo "<br>";
-echo $videosDao['adicionarVideo']("Hitman Absolution Trailer", "https://www.youtube.com/watch?v=fFZRszQuDjI", '0', "2") ? 'true':'false';
-echo "<br>";
-echo "LISTAR <br>";
-echo json_encode($videosDao['listarVideos']()).'<br>';
-echo "<br>";
-echo "BUSCAR <br>";
-echo json_encode($videosDao['buscarVideoPorId']('13')).'<br>';
-echo "<br>";
-echo "EDITAR <br>";
-echo json_encode($videosDao['editarVideo']("1","Lá vem o Marcos", "https://www.youtube.com/watch?v=yazkNHqoyZ8", '0', "4")).'<br>';
-echo "<br>";
-echo "RESULTADO EDICAO <br>";
-echo json_encode($videosDao['buscarVideoPorId']("1")).'<br>';
-echo "<br>";
-echo "REMOVER <br>";
-echo json_encode($videosDao['removerVideo']("1")).'<br>';
-echo "<br>";
-echo "RESULTADO REMOCAO <br>";
-echo json_encode($videosDao['listarVideos']()).'<br>';
-echo "<br>";
-echo "VIDEOS POR CATEGORIA <br>";
-echo json_encode($videosDao['videosPorCategoria']("2")).'<br>';
-echo "<br>";
-echo "VISUALIZAÇÕES POR CATEGORIA <br>";
-echo json_encode($videosDao['visualizacoesPorCategoria']("4")).'<br>';
-echo "<br>";
-
-echo "<br><br>FAVORITOS <br><br>";
-echo "ADICIONAR <br>";
-echo $favoritosDao['adicionarFavorito']("2", "1") ? 'true':'false';
-echo "<br>";
-echo $favoritosDao['adicionarFavorito']("1", "1") ? 'true':'false';
-echo "<br>";
-echo "LISTAR <br>";
-echo json_encode($favoritosDao['listarFavoritos']()).'<br>';
-echo "<br>";
-echo "BUSCAR <br>";
-echo json_encode($favoritosDao['buscarFavoritoPorId']('1')).'<br>';
-echo json_encode($favoritosDao['buscarFavorito']('1', '1')).'<br>';
-echo "<br>";
-echo "EDITAR <br>";
-echo json_encode($favoritosDao['editarFavorito']("1","1", "2")).'<br>';
-echo "<br>";
-echo "RESULTADO EDICAO <br>";
-echo json_encode($favoritosDao['buscarFavoritoPorId']("1")).'<br>';
-echo "<br>";
-echo "REMOVER <br>";
-echo json_encode($favoritosDao['removerFavorito']("1")).'<br>';
-echo "<br>";
-echo "RESULTADO REMOCAO <br>";
-echo json_encode($favoritosDao['listarFavoritos']()).'<br>';
-echo "<br>";
-
-
-echo "<br><br>ASSISTIR MAIS TARDE <br><br>";
-echo "ADICIONAR <br>";
-echo $assistirMaisTardeDao['adicionarAssistirMaisTarde']("2", "1") ? 'true':'false';
-echo "<br>";
-echo $assistirMaisTardeDao['adicionarAssistirMaisTarde']("1", "1") ? 'true':'false';
-echo "<br>";
-echo "LISTAR <br>";
-echo json_encode($assistirMaisTardeDao['listarAssistirMaisTarde']()).'<br>';
-echo "<br>";
-echo "BUSCAR <br>";
-echo json_encode($assistirMaisTardeDao['buscarAssistirMaisTardePorId']('1')).'<br>';
-echo json_encode($assistirMaisTardeDao['buscarAssistirMaisTarde']('1', '1')).'<br>';
-echo "<br>";
-echo "EDITAR <br>";
-echo json_encode($assistirMaisTardeDao['editarAssistirMaisTarde']("1","1", "2")).'<br>';
-echo "<br>";
-echo "RESULTADO EDICAO <br>";
-echo json_encode($assistirMaisTardeDao['buscarAssistirMaisTardePorId']("1")).'<br>';
-echo "<br>";
-echo "REMOVER <br>";
-echo json_encode($assistirMaisTardeDao['removerAssistirMaisTarde']("1")).'<br>';
-echo "<br>";
-echo "RESULTADO REMOCAO <br>";
-echo json_encode($assistirMaisTardeDao['listarAssistirMaisTarde']()).'<br>';
-echo "<br>";
-
+<?php 
+    if(isset($_COOKIE['userId'])){
+        header("Location:../public/html/home.html");
+    }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Fetnlix - Entre</title>
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+</head>
+
+<body style="background-image: linear-gradient(to right, rgb(0, 12, 31), rgba(14, 62, 140))">
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="height:100vh">
+            <div class="col-md-6 mx-auto text-center">
+                <div class=" text-center mx-auto text-light">
+                    <img width="35%" class="mt-5" src="img/logo.png">
+                    <h1 class="mt-2 mb-4">FETNLIX</h1>
+                    <p >Bem-vindo(a) ao Fetnlix. Acesse e confira o maior acervo de vídeos que vão alegrar essa sua vida triste e medíocre.</p>
+                </div>
+                
+                <form id="autenticar" method="post" action="index.php">
+                <?php 
+                if(!$_POST){
+                    echo"<div class='form-group mx-auto text-center'>
+                        <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
+                        <input type='password' class='form-control mb-3' name='password' placeholder='Senha'>
+                        <button type='submit' class='text-white btn btn-outline-primary w-100 mb-3'>Entrar</button>
+                        <a href='html/cadastro.php' class='text-white btn btn-outline-primary w-100'>Cadastrar</a>
+                    </div>";
+                } else {
+                    $usuarioDao = require '../back/UsuariosDAO.php';
+                    if($usuarioDao['autenticarUsuario']($_POST['email'], $_POST['password']) == false){
+                        echo"<div class='form-group mx-auto text-center'>
+                            <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
+                            <input type='password' class='form-control mb-3' name='password' placeholder='Senha'>
+                            <button type='submit' class='text-white btn btn-outline-primary w-100 mb-3'>Entrar</button>
+                            <a href='html/cadastro.php' class='text-white btn btn-outline-primary w-100'>Cadastrar</a>
+                            <p class='text-danger mt-3'>Registro não existente</p>
+                        </div>";
+                    } else {
+                        header("Location:../public/html/home.html");
+                    }
+                } 
+                ?>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

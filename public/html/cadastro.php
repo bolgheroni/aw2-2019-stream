@@ -34,14 +34,7 @@
                             $userDao = require '../../back/UsuariosDAO.php' ;
                             if(!(is_null($_POST['email']) || is_null($_POST['user']) || is_null($_POST['password']))
                             && $userDao['adicionarUsuario']($_POST['email'], $_POST['user'], $_POST['password'], false)){
-                                echo "<div class='form-group mx-auto text-center'>
-                                <input type='email' class='form-control mt-5 mb-3' name='user' placeholder='E-mail'>
-                                <input type='text' class='form-control mb-3' name='email' placeholder='Nome de Usuário'>
-                                <input type='password' class='form-control mb-3' name='password' placeholder='Senha'>
-                                <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
-                                <p class='text-primary mt-3'>Cadastro efetuado com sucesso!</p>
-                            </div>
-                                ";
+                                header("Location:../index.php");
                             } else {
                                 echo "<div class='form-group mx-auto text-center'>
                                 <input type='email' class='form-control mt-5 mb-3' name='user' placeholder='E-mail'>
