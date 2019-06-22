@@ -1,6 +1,7 @@
 <?php  
 $userDao = require '../back/UsuariosDAO.php' ;
 $videosDao = require '../back/VideosDAO.php' ;
+$favoritosDao = require '../back/FavoritosDAO.php' ;
 
 echo "USUARIOS <br><br>";
 echo "ADICIONAR <br>";
@@ -27,7 +28,7 @@ echo "AUTENTICAR <br>";
 echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345678")).'<br>';
 echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345671")).'<br>';
 
-echo "VIDEOS <br><br>";
+echo "<br><br>VIDEOS <br><br>";
 echo "ADICIONAR <br>";
 echo $videosDao['adicionarVideo']("Lá vem o Mmarcos", "https://www.youtube.com/watch?v=yazkNHqoyZ8", '2', "4") ? 'true':'false';
 echo "<br>";
@@ -56,6 +57,32 @@ echo json_encode($videosDao['videosPorCategoria']("2")).'<br>';
 echo "<br>";
 echo "VISUALIZAÇÕES POR CATEGORIA <br>";
 echo json_encode($videosDao['visualizacoesPorCategoria']("4")).'<br>';
+echo "<br>";
+
+echo "<br><br>FAVORITOS <br><br>";
+echo "ADICIONAR <br>";
+echo $favoritosDao['adicionarFavorito']("2", "1") ? 'true':'false';
+echo "<br>";
+echo $favoritosDao['adicionarFavorito']("1", "1") ? 'true':'false';
+echo "<br>";
+echo "LISTAR <br>";
+echo json_encode($favoritosDao['listarFavoritos']()).'<br>';
+echo "<br>";
+echo "BUSCAR <br>";
+echo json_encode($favoritosDao['buscarFavoritoPorId']('1')).'<br>';
+echo json_encode($favoritosDao['buscarFavorito']('1', '1')).'<br>';
+echo "<br>";
+echo "EDITAR <br>";
+echo json_encode($favoritosDao['editarFavorito']("1","1", "2")).'<br>';
+echo "<br>";
+echo "RESULTADO EDICAO <br>";
+echo json_encode($favoritosDao['buscarFavoritoPorId']("1")).'<br>';
+echo "<br>";
+echo "REMOVER <br>";
+echo json_encode($favoritosDao['removerFavorito']("1")).'<br>';
+echo "<br>";
+echo "RESULTADO REMOCAO <br>";
+echo json_encode($favoritosDao['listarFavoritos']()).'<br>';
 echo "<br>";
 
 ?>
