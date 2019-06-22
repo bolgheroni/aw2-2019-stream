@@ -39,11 +39,26 @@ $GLOBALS['listarUsuarios'] = function(){
     return $retorno;
 };
 
+function ultimoId(){
+    if(!file_exists($GLOBALS['caminhoUsuarios'])){
+        return "0";
+    }else{
+        $ultimoId = "0";
+        foreach(listarUsuarios() as $usuario){
+            $id = $usuario['id'];
+            if($id>$ultimoId){
+                $ultimoId = $id; 
+            }
+        }
+        return $ultimoId;
+    }
+}
+
 function adicionarUsuario($email, $username, $senha, $ehAdm){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         $registro_existe = buscarUsuarioPorEmail($email) != null;
         if(!$registro_existe){
-            $id = sizeof(listarUsuarios()) +1;
+            $id = ultimoId() +1;
             return $GLOBALS['adicionarUsuario'](array($id,$email, $username, $senha, $ehAdm));
         }else{
             return false;
