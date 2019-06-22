@@ -61,7 +61,7 @@ function buscarUsuarioPorId($id){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         foreach($GLOBALS['listarUsuarios']() as $linha){
             if($linha[0] == $id){
-                return array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
+                return array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "ehAdm" => $linha[4]);
             }
         }
         return false;
@@ -86,7 +86,7 @@ function listarUsuarios(){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         $retorno = array();
         foreach($GLOBALS['listarUsuarios']() as $linha){
-            $retorno[] = array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "isAdm" => $linha[4]);
+            $retorno[] = array("id" => $linha[0], "email" => $linha[1],"username" => $linha[2], "senha" => $linha[3], "ehAdm" => $linha[4]);
         }
         return $retorno;
     }else{
@@ -100,6 +100,7 @@ function autenticarUsuario($email, $senha){
             if($usuario['email'] == $email && $usuario['senha'] == $senha){
                 setcookie('userName', $usuario['username']);                
                 setcookie('userId', $usuario['id']);                
+                setcookie('userPermission', $usuario['ehAdm']);                
                 return $usuario;
             }
         }

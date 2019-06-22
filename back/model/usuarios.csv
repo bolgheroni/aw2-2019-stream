@@ -2,3 +2,5 @@ id,email,username,senha,ehAdm
 1,joaoao@gmail.com,joao,12345678,true
 2,joana@gmail.com,joana,12345672,false
 3,joao@gmail.com,joao,12345678,true
+4,12,joao@gmail.com,joao,12345678
+5,15,joana@gmail.com,joana,12345672
