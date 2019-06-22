@@ -39,7 +39,7 @@ $GLOBALS['listarUsuarios'] = function(){
     return $retorno;
 };
 
-function ultimoId(){
+function ultimoIdUsuario(){
     if(!file_exists($GLOBALS['caminhoUsuarios'])){
         return "0";
     }else{
@@ -58,7 +58,7 @@ function adicionarUsuario($email, $username, $senha, $ehAdm){
     if(file_exists($GLOBALS['caminhoUsuarios'])){
         $registro_existe = buscarUsuarioPorEmail($email) != null;
         if(!$registro_existe){
-            $id = ultimoId() +1;
+            $id = ultimoIdUsuario() +1;
             return $GLOBALS['adicionarUsuario'](array($id,$email, $username, $senha, $ehAdm));
         }else{
             return false;

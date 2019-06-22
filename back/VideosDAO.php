@@ -8,6 +8,22 @@ $GLOBALS['adicionarVideo'] = function($ar){
     fclose($f);
     return true;
 };
+$GLOBALS['adicionarVideos'] = function($ar){
+    $f = fopen($GLOBALS['caminhoVideos'], 'a');
+    foreach($ar as $video){
+        fputcsv($f, $video);
+    }
+    fclose($f);
+    return true;
+};
+
+$GLOBALS['limparVideos'] = function(){
+    $f = fopen($GLOBALS['caminhoVideos'], 'w');
+    $campos = array("id", 'nome', 'link', 'visualizacoes', 'idCategoria');
+    fputcsv($f, $campos);
+    fclose($f);
+    return true;
+};
 
 $GLOBALS['listarVideos'] = function(){
     $f = fopen($GLOBALS['caminhoVideos'], 'r');
@@ -24,11 +40,26 @@ $GLOBALS['listarVideos'] = function(){
     return $retorno;
 };
 
+function ultimoIdVideo(){
+    if(!file_exists($GLOBALS['caminhoVideos'])){
+        return "0";
+    }else{
+        $ultimoId = "0";
+        foreach(listarVideos() as $video){
+            $id = $video['id'];
+            if($id>$ultimoId){
+                $ultimoId = $id; 
+            }
+        }
+        return $ultimoId;
+    }
+}
+
 function adicionarVideo($nome, $link, $visualizacoes, $idCategoria){
     if(file_exists($GLOBALS['caminhoVideos'])){
         $register_exists = buscarVideoPorNome($nome) != null;
         if(!$register_exists){
-            $id = sizeof(listarVideos()) +1;
+            $id =  ultimoIdVideo() +1;
             return $GLOBALS['adicionarVideo'](array($id, $nome, $link, $visualizacoes, $idCategoria));
         }else{
             return false;
@@ -84,7 +115,6 @@ function listarVideos(){
     if(file_exists($GLOBALS['caminhoVideos'])){
         $retorno = array();
         foreach($GLOBALS['listarVideos']() as $linha){
-            // id,nome,link,visualizacoes,idCategoria
             $retorno[] = array("id" => $linha[0], "nome" => $linha[1],"link" => $linha[2], "visualizacoes" => $linha[3], "idCategoria" => $linha[4]);
         }
         return $retorno;
@@ -92,11 +122,45 @@ function listarVideos(){
         return false;
     }
 }
+function removerVideo($id){
+    if(file_exists($GLOBALS['caminhoVideos'])){
+        $registros = $GLOBALS['listarVideos']();
+        foreach($registros as $indice => $linha){
+            if($linha[0] == $id){
+                \array_splice($registros, $indice, 1);
+                $GLOBALS['limparVideos']();
+                return $GLOBALS['adicionarVideos']($registros);
+            }
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
 
+function editarVideo($id, $nome, $link, $visualizacoes, $idCategoria){
+    if(file_exists($GLOBALS['caminhoVideos'])){
+        $registros = $GLOBALS['listarVideos']();
+        foreach($registros as $indice => $linha){
+            if($linha[0] == $id){
+                $registro = array($id, $nome, $link, $visualizacoes, $idCategoria);
+                $registros[$indice] = $registro;
+                $GLOBALS['limparVideos']();
+                $GLOBALS['adicionarVideos']($registros);
+                return true;
+            }
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
 
 return [
     'adicionarVideo' => 'adicionarVideo',
     'listarVideos' => 'listarVideos', 
-    'buscarVideoPorId' => 'buscarVideoPorId'
+    'buscarVideoPorId' => 'buscarVideoPorId',
+    'removerVideo' => 'removerVideo',
+    'editarVideo' => 'editarVideo'
 ]
 ?>

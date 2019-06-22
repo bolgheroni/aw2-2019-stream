@@ -35,8 +35,21 @@ echo $videosDao['adicionarVideo']("Hitman Absolution Trailer", "https://www.yout
 echo "<br>";
 echo "LISTAR <br>";
 echo json_encode($videosDao['listarVideos']()).'<br>';
+echo "<br>";
 echo "BUSCAR <br>";
 echo json_encode($videosDao['buscarVideoPorId']('13')).'<br>';
-
+echo "<br>";
+echo "EDITAR <br>";
+echo json_encode($videosDao['editarVideo']("1","Lá vem o Marcos", "https://www.youtube.com/watch?v=yazkNHqoyZ8", '0', "4")).'<br>';
+echo "<br>";
+echo "RESULTADO EDICAO <br>";
+echo json_encode($videosDao['buscarVideoPorId']("1")).'<br>';
+echo "<br>";
+echo "REMOVER <br>";
+echo json_encode($videosDao['removerVideo']("1")).'<br>';
+echo "<br>";
+echo "RESULTADO REMOCAO <br>";
+echo json_encode($videosDao['listarVideos']()).'<br>';
+echo "<br>";
 
 ?>
