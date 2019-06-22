@@ -2,6 +2,7 @@
 $userDao = require '../back/UsuariosDAO.php' ;
 $videosDao = require '../back/VideosDAO.php' ;
 $favoritosDao = require '../back/FavoritosDAO.php' ;
+$assistirMaisTardeDao = require '../back/AssistirMaisTardeDAO.php' ;
 
 echo "USUARIOS <br><br>";
 echo "ADICIONAR <br>";
@@ -83,6 +84,33 @@ echo json_encode($favoritosDao['removerFavorito']("1")).'<br>';
 echo "<br>";
 echo "RESULTADO REMOCAO <br>";
 echo json_encode($favoritosDao['listarFavoritos']()).'<br>';
+echo "<br>";
+
+
+echo "<br><br>ASSISTIR MAIS TARDE <br><br>";
+echo "ADICIONAR <br>";
+echo $assistirMaisTardeDao['adicionarAssistirMaisTarde']("2", "1") ? 'true':'false';
+echo "<br>";
+echo $assistirMaisTardeDao['adicionarAssistirMaisTarde']("1", "1") ? 'true':'false';
+echo "<br>";
+echo "LISTAR <br>";
+echo json_encode($assistirMaisTardeDao['listarAssistirMaisTarde']()).'<br>';
+echo "<br>";
+echo "BUSCAR <br>";
+echo json_encode($assistirMaisTardeDao['buscarAssistirMaisTardePorId']('1')).'<br>';
+echo json_encode($assistirMaisTardeDao['buscarAssistirMaisTarde']('1', '1')).'<br>';
+echo "<br>";
+echo "EDITAR <br>";
+echo json_encode($assistirMaisTardeDao['editarAssistirMaisTarde']("1","1", "2")).'<br>';
+echo "<br>";
+echo "RESULTADO EDICAO <br>";
+echo json_encode($assistirMaisTardeDao['buscarAssistirMaisTardePorId']("1")).'<br>';
+echo "<br>";
+echo "REMOVER <br>";
+echo json_encode($assistirMaisTardeDao['removerAssistirMaisTarde']("1")).'<br>';
+echo "<br>";
+echo "RESULTADO REMOCAO <br>";
+echo json_encode($assistirMaisTardeDao['listarAssistirMaisTarde']()).'<br>';
 echo "<br>";
 
 ?>
