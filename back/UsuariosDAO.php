@@ -127,7 +127,7 @@ function removerUsuario($id){
         $registros = $GLOBALS['listarUsuarios']();
         foreach($registros as $indice => $linha){
             if($linha[0] == $id){
-                \array_splice($registros, 1, $indice);
+                \array_splice($registros, $indice, 1);
                 $GLOBALS['limparUsuarios']();
                 return $GLOBALS['adicionarUsuarios']($registros);
             }
@@ -164,5 +164,6 @@ return [
     'buscarUsuarioPorId' => 'buscarUsuarioPorId',
     'autenticarUsuario' => 'autenticarUsuario',
     'editarUsuario' => 'editarUsuario',
+    'removerUsuario' => 'removerUsuario'
 ]
 ?>
