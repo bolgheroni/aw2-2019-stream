@@ -29,7 +29,7 @@ echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345671")).'<
 
 echo "VIDEOS <br><br>";
 echo "ADICIONAR <br>";
-echo $videosDao['adicionarVideo']("Lá vem o Mmarcos", "https://www.youtube.com/watch?v=yazkNHqoyZ8", '0', "4") ? 'true':'false';
+echo $videosDao['adicionarVideo']("Lá vem o Mmarcos", "https://www.youtube.com/watch?v=yazkNHqoyZ8", '2', "4") ? 'true':'false';
 echo "<br>";
 echo $videosDao['adicionarVideo']("Hitman Absolution Trailer", "https://www.youtube.com/watch?v=fFZRszQuDjI", '0', "2") ? 'true':'false';
 echo "<br>";
@@ -50,6 +50,12 @@ echo json_encode($videosDao['removerVideo']("1")).'<br>';
 echo "<br>";
 echo "RESULTADO REMOCAO <br>";
 echo json_encode($videosDao['listarVideos']()).'<br>';
+echo "<br>";
+echo "VIDEOS POR CATEGORIA <br>";
+echo json_encode($videosDao['videosPorCategoria']("2")).'<br>';
+echo "<br>";
+echo "VISUALIZAÇÕES POR CATEGORIA <br>";
+echo json_encode($videosDao['visualizacoesPorCategoria']("4")).'<br>';
 echo "<br>";
 
 ?>

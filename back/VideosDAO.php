@@ -170,11 +170,25 @@ function videosPorCategoria($idCategoria){
     }
 }
 
+function visualizacoesPorCategoria($idCategoria){
+    if(file_exists($GLOBALS['caminhoVideos'])){
+        $visualizacoes = 0;
+        foreach(videosPorCategoria($idCategoria) as $video){
+            $visualizacoes+= $video['visualizacoes'];
+        }
+        return $visualizacoes;
+    }else{
+        return false;
+    }
+}
+
 return [
     'adicionarVideo' => 'adicionarVideo',
     'listarVideos' => 'listarVideos', 
     'buscarVideoPorId' => 'buscarVideoPorId',
     'removerVideo' => 'removerVideo',
-    'editarVideo' => 'editarVideo'
+    'editarVideo' => 'editarVideo',
+    'videosPorCategoria' => 'videosPorCategoria',
+    'visualizacoesPorCategoria' => 'visualizacoesPorCategoria'
 ]
 ?>
