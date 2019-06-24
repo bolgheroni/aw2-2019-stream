@@ -75,34 +75,34 @@
     </div>
 
     <!--Sessão-->
-    <?php $categoriaDao = require '../../back/model/categorias.php';
-    for($i = 1; $i <= 6; $i++){
-    ?>
-    <div class="col-md-10 text-white mx-auto mt-5">
-        <h2><?php echo $categoriaDao['buscarCategoriaPorId']($i); ?></h2>
-        <div class="row mt-2">
-            <div class="d-flex flex-wrap w-100">
-                <?php 
-                    foreach($videoDao['videosPorCategoria']($i) as $video){
-                        echo "<div class='col-sm-6 col-md-4 col-xl-3'>
+
+    <?php
+    $categoriaDao = require '../../back/model/categorias.php';
+    for ($i = 1; $i <= 6; $i++) {
+
+        echo "<div class='col-md-10 text-white mx-auto mt-5'>
+        <h2>" . $categoriaDao['buscarCategoriaPorId']($i) . "</h2>
+        <div class='row mt-2'>
+            <div class='d-flex flex-wrap w-100'>";
+
+        $videoDao = require '../../back/VideosDAO.php';
+        foreach ($videoDao['videosPorCategoria']($i) as $video) {
+            echo "<div class='col-sm-6 col-md-4 col-xl-3'>
                             <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "' class='card w-100 mt-3'>
                                 <div class='card-body'>
                                     <div class='card-title font-weight-bold text-center my-auto'>" . $video['nome'] . "</div>
                                 </div>
                             </a>
                         </div>";
-                    }
-                ?>
+        }
 
+        echo "
             </div>
         </div>
-    </div>
-
-
-    <?php
+    </div>";
     }
     ?>
-    
+
 
     <!--Sessão-->
     <div class="col-md-10 text-white mx-auto mt-5">

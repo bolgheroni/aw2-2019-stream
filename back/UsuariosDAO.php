@@ -179,6 +179,7 @@ return [
     'buscarUsuarioPorId' => 'buscarUsuarioPorId',
     'autenticarUsuario' => 'autenticarUsuario',
     'editarUsuario' => 'editarUsuario',
-    'removerUsuario' => 'removerUsuario'
+    'removerUsuario' => 'removerUsuario',
+    'buscarUsuarioPorEmail' => 'buscarUsuarioPorEmail'
 ]
 ?>
