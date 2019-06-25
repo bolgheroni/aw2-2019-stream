@@ -10,17 +10,16 @@ $GLOBALS['listaCategorias'] = function(){
     );
 };
 
-function categoriaPorId($id){
-    foreach($GLOBALS['listaCategorias']() as $categoria){
-        if($categoria[0] == $id){
-            return $categoria[1];
-        }
-    }
-    return false;
-}
 
 return [
-    'buscarCategoriaPorId' => 'categoriaPorId'
+    'buscarCategoriaPorId' => function($id){
+        foreach($GLOBALS['listaCategorias']() as $categoria){
+            if($categoria[0] == $id){
+                return $categoria[1];
+            }
+        }
+        return false;
+    }
 ];
 
 ?>
