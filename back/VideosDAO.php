@@ -184,6 +184,20 @@ function visualizacoesPorCategoria($idCategoria){
     }
 }
 
+function adicionarVisualizacao($idVideo){
+    if(file_exists($GLOBALS['caminhoVideos'])){
+        $video = buscarVideoPorId($idVideo);
+        if($video){
+            $video['visualizacoes'] += 1;
+            return editarVideo($video['id'], $video['nome'], $video['link'], $video['visualizacoes'], $video['idCategoria'] );
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
+
 return [
     'adicionarVideo' => 'adicionarVideo',
     'listarVideos' => 'listarVideos', 
@@ -191,6 +205,7 @@ return [
     'removerVideo' => 'removerVideo',
     'editarVideo' => 'editarVideo',
     'videosPorCategoria' => 'videosPorCategoria',
-    'visualizacoesPorCategoria' => 'visualizacoesPorCategoria'
+    'visualizacoesPorCategoria' => 'visualizacoesPorCategoria',
+    'adicionarVisualizacao' => 'adicionarVisualizacao'
 ]
 ?>

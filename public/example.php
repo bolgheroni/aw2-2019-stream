@@ -59,6 +59,14 @@ echo "<br>";
 echo "VISUALIZAÇÕES POR CATEGORIA <br>";
 echo json_encode($videosDao['visualizacoesPorCategoria']("4")).'<br>';
 echo "<br>";
+echo "<br>";
+echo "ADICIONAR VISUALIZAÇÃO <br>";
+echo json_encode($videosDao['adicionarVisualizacao']("3")).'<br>';
+echo "<br>";
+echo "RESULTADO ADIÇÃO <br>";
+echo json_encode($videosDao['buscarVideoPorId']("3")).'<br>';
+echo "<br>";
+
 
 echo "<br><br>FAVORITOS <br><br>";
 echo "ADICIONAR <br>";
