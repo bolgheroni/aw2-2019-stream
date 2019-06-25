@@ -31,7 +31,6 @@
                         <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
                         <input type='password' class='form-control mb-3' name='password' placeholder='Senha'>
                         <button type='submit' class='text-white btn btn-outline-primary w-100 mb-3'>Entrar</button>
-                        <a href='html/cadastro.php' class='text-white btn btn-outline-primary w-100'>Cadastrar</a>
                     </div>";
                 } else {
                     $usuarioDao = require '../back/UsuariosDAO.php';
@@ -40,7 +39,6 @@
                             <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
                             <input type='password' class='form-control mb-3' name='password' placeholder='Senha'>
                             <button type='submit' class='text-white btn btn-outline-primary w-100 mb-3'>Entrar</button>
-                            <a href='html/cadastro.php' class='text-white btn btn-outline-primary w-100'>Cadastrar</a>
                             <p class='text-danger mt-3'>Registro não existente</p>
                         </div>";
                     } else {
@@ -50,6 +48,7 @@
                 ?>
 
                 </form>
+                <a href='html/cadastro.php' class='text-white btn btn-outline-primary w-100'>Cadastrar</a>
             </div>
         </div>
     </div>

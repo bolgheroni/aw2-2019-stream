@@ -19,23 +19,25 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
 
 <body style="background-image: linear-gradient(to right, rgb(0, 12, 31), rgba(14, 62, 140))">
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-2">
             <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
-                <div class="d-flex justify-content-around">
+                <div class="d-flex flex-wrap justify-content-around">
                     <!--Aplicar laço de repetição php-->
-                    <a class="btn btn-primary" href="#videos">Vídeos</a>
-                    <a class="btn btn-primary" href="#assistirdepois">Assistir depois</a>
-                    <a class="btn btn-primary" href="#categoriasDiv">Categorias</a>
-                    <a class="btn btn-primary" href="#favoritos">Favoritos</a>
+                    <a class="btn btn-outline-primary text-white mt-3" href="#videos">Vídeos</a>
+                    <a class="btn btn-outline-primary text-white mt-3" href="#assistirdepois">Assistir depois</a>
+                    <a class="btn btn-outline-primary text-white mt-3" href="#categorias">Categorias</a>
+                    <a class="btn btn-outline-primary text-white mt-3" href="#favoritos">Favoritos</a>
                     <?php
 
                     $usuario = $usuarioDao['buscarUsuarioPorId']($_COOKIE['userId']);
                     if ($usuario != false) {
                         if ($usuario['ehAdm'] == true) {
-                            echo "<a class='btn btn-primary' href='admin.php'>Admin</a>";
+                            echo "<a class='btn btn-outline-primary text-white mt-3' href='admin.php'>Admin</a>";
                         }
                     }
                     ?>
+
+                    <button type="button" class="btn btn-outline-danger text-white mt-3" onclick="sair()">Sair</button>
                 </div>
             </div>
         </div>
@@ -105,6 +107,7 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
     </div>
 
     <!--Sessão-->
+    <div id="categorias"></div>
 
     <?php
 
@@ -139,7 +142,7 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
 
 
     <!--Sessão-->
-    <div class="col-md-10 text-white mx-auto mt-5">
+    <div class="col-md-10 text-white mx-auto mt-5 mb-5">
         <h2 id="favoritos">Favoritos</h2>
         <div class="row mt-2">
             <div class="d-flex flex-wrap w-100">
@@ -178,7 +181,15 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
         </div>
     </div>
 
+    <script type="text/javascript">
+        function sair(){
+            <?php 
+                $usuarioDao['desautenticarUsuario']();
+                header("Location:../index.php");    
+            ?>
+        }
 
+    </script>
 </body>
 
 </html>
