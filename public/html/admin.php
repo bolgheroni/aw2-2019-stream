@@ -16,6 +16,7 @@
         <div class="row justify-content-center align-items-center" style="height:100vh">
             <div class="col-md-6 mx-auto text-center">
             <div class=" text-center mx-auto text-light">
+                <a class="btn btn-outline-primary text-white w-100" href="home.php">Voltar a home</a>
                     <img width="35%" class="mt-5" src="../img/logo.png">
                     <h1 class="mt-4 mb-4">Cadastrar vídeo</h1>
                 </div>
@@ -24,11 +25,11 @@
                     <?php
                     if (!$_POST) {
                         echo "<div class='form-group mx-auto text-center'>
-              <input type='text' class='form-control mt-5 mb-3' name='nome' placeholder='Nome do Vídeo'>
-              <input type='text' class='form-control mb-3' name='link' placeholder='Link do vídeo'>
+                        <input type='text' class='form-control mt-5 mb-3' name='nome' placeholder='Nome do Vídeo'>
+                        <input type='text' class='form-control mb-3' name='link' placeholder='Link do vídeo'>
 
-              <div class='form-group'>
-              <select class='form-control' name='categoria'>";
+                        <div class='form-group'>
+                        <select class='form-control' name='categoria'>";
 
                         $categoriaDao = require '../../back/model/categorias.php';
                         for ($i = 1; $i <= 6; $i++) {
@@ -36,7 +37,7 @@
                         }
                         echo "</div>";
                         echo "<button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar Vídeo</button>
-          </div>";
+                        </div>";
                     } else {
                         $videoDao = require '../../back/VideosDAO.php';
                         if (
@@ -44,11 +45,11 @@
                             && $videoDao['adicionarVideo']($_POST['nome'], $_POST['link'], 0, $_POST['categoria'])
                         ) {
                             echo "<div class='form-group mx-auto text-center'>
-                <input type='text' class='form-control mt-5 mb-3' name='nome' placeholder='Nome do Vídeo'>
-                <input type='text' class='form-control mb-3' name='link' placeholder='Link do vídeo'>
+                            <input type='text' class='form-control mt-5 mb-3' name='nome' placeholder='Nome do Vídeo'>
+                            <input type='text' class='form-control mb-3' name='link' placeholder='Link do vídeo'>
   
-                <div class='form-group'>
-                <select class='form-control' name='categoria'>";
+                            <div class='form-group'>
+                            <select class='form-control' name='categoria'>";
 
                             $categoriaDao = require '../../back/model/categorias.php';
                             for ($i = 1; $i <= 6; $i++) {
@@ -56,16 +57,16 @@
                             }
                             echo "</div>";
                             echo "<button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar Vídeo</button>
-            </div>";
+                            </div>";
 
                             echo "<p class='text-primary mt-3'>Vídeo cadastrado ;)</p>";
                         } else {
                             echo "<div class='form-group mx-auto text-center'>
-                <input type='text' class='form-control mt-5 mb-3' name='nome' placeholder='Nome do Vídeo'>
-                <input type='text' class='form-control mb-3' name='link' placeholder='Link do vídeo'>
+                            <input type='text' class='form-control mt-5 mb-3' name='nome' placeholder='Nome do Vídeo'>
+                            <input type='text' class='form-control mb-3' name='link' placeholder='Link do vídeo'>
   
-                <div class='form-group'>
-                <select class='form-control' name='categoria'>";
+                            <div class='form-group'>
+                            <select class='form-control' name='categoria'>";
 
                             $categoriaDao = require '../../back/model/categorias.php';
                             for ($i = 1; $i <= 6; $i++) {
@@ -73,7 +74,7 @@
                             }
                             echo "</div>";
                             echo "<button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar Vídeo</button>
-            </div>";
+                            </div>";
 
                             echo "<p class='text-danter mt-3'>Complete o formulário corretamente</p>";
                         }
@@ -96,7 +97,7 @@
                             echo "<div class='form-group mx-auto text-center'>
                             <input type='email' class='form-control mt-5 mb-3' name='user' placeholder='E-mail do novo administrador'>
                             <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
-                        </div>";
+                            </div>";
                         } else {
                             $userDao = require '../../back/UsuariosDAO.php' ;
                             if(!(is_null($_POST['email']))){
@@ -107,15 +108,15 @@
                                     <input type='email' class='form-control mt-5 mb-3' name='user' placeholder='E-mail do novo administrador'>
                                     <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
                                     <p class='text-primary mt-3'>O usuário indicado agora é administrador ;)</p>
-                                </div>
+                                    </div>
                                     ";
                                 } else {
                                     echo "<div class='form-group mx-auto text-center'>
-                                <input type='email' class='form-control mt-5 mb-3' name='user' placeholder='E-mail do novo administrador'>
-                                <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
-                                <p class='text-danger mt-3'>E-mail não existe</p>
-                            </div>
-                                ";
+                                    <input type='email' class='form-control mt-5 mb-3' name='user' placeholder='E-mail do novo administrador'>
+                                    <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
+                                    <p class='text-danger mt-3'>E-mail não existe</p>
+                                    </div>
+                                    ";
                                 }
                                 
                             } else {
@@ -123,7 +124,7 @@
                                 <input type='email' class='form-control mt-5 mb-3' name='user' placeholder='E-mail do novo administrador'>
                                 <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
                                 <p class='text-danger mt-3'>Preencha o formulário corretamente</p>
-                            </div>
+                                </div>
                                 ";
                             }
                             

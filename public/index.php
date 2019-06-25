@@ -1,6 +1,6 @@
 <?php 
     if(isset($_COOKIE['userId'])){
-        header("Location:../public/html/home.html");
+        header("Location:../public/html/home.php");
     }
 ?>
 <!DOCTYPE html>
@@ -44,7 +44,7 @@
                             <p class='text-danger mt-3'>Registro não existente</p>
                         </div>";
                     } else {
-                        header("Location:../public/html/home.html");
+                        header("Location:../public/html/home.php");
                     }
                 } 
                 ?>

@@ -13,13 +13,22 @@
 <body style="background-image: linear-gradient(to right, rgb(0, 12, 31), rgba(14, 62, 140))">
     <div class="container">
         <div class="row mt-5">
-            <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
+            <div class="col-sm-12 col-md-10 col-lg-8 mx-auto">
                 <div class="d-flex justify-content-around">
                     <!--Aplicar laço de repetição php-->
                     <a class="btn btn-primary" href="#videos">Vídeos</a>
                     <a class="btn btn-primary" href="#assistirdepois">Assistir depois</a>
                     <a class="btn btn-primary" href="#categoriasDiv">Categorias</a>
                     <a class="btn btn-primary" href="#favoritos">Favoritos</a>
+                    <?php 
+                        $usuarioDao = require '../../back/UsuariosDAO.php';
+                        $usuario = $usuarioDao['buscarUsuarioPorId']($_COOKIE['userId']);
+                        if($usuario != false){
+                            if($usuario['ehAdm'] == true){
+                                echo "<a class='btn btn-primary' href='admin.php'>Admin</a>";  
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -35,7 +44,7 @@
                 $videoDao = require '../../back/VideosDAO.php';
                 foreach ($videoDao['listarVideos']() as $video) {
                     echo "<div class='col-sm-6 col-md-4 col-xl-3'>
-                        <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "' class='card w-100 mt-3'>
+                        <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=".$video['id']."' class='card w-100 mt-3'>
                             <div class='card-body'>
                                 <div class='card-title font-weight-bold text-center my-auto'>" . $video['nome'] . "</div>
                             </div>
@@ -58,7 +67,7 @@
                 foreach ($assistirDao['listarAssistirMaisTarde']() as $video) {
                     if ($video['fk_usuario'] == $_COOKIE['userId']) {
                         echo "<div class='col-sm-6 col-md-4 col-xl-3'>
-                            <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "' class='card w-100 mt-3'>
+                            <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=".$video['id']."' class='card w-100 mt-3'>
                                 <div class='card-body'>
                                     <div class='card-title font-weight-bold text-center my-auto'>" . $video['nome'] . "</div>
                                 </div>
@@ -88,7 +97,7 @@
         $videoDao = require '../../back/VideosDAO.php';
         foreach ($videoDao['videosPorCategoria']($i) as $video) {
             echo "<div class='col-sm-6 col-md-4 col-xl-3'>
-                            <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "' class='card w-100 mt-3'>
+                            <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=".$video['id']."' class='card w-100 mt-3'>
                                 <div class='card-body'>
                                     <div class='card-title font-weight-bold text-center my-auto'>" . $video['nome'] . "</div>
                                 </div>
@@ -115,7 +124,7 @@
                 foreach ($favoritosDao['listarFavoritos']() as $video) {
                     if ($video['fk_usuario'] == $_COOKIE['userId']) {
                         echo "<div class='col-sm-6 col-md-4 col-xl-3'>
-                            <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "' class='card w-100 mt-3'>
+                            <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=".$video['id']."' class='card w-100 mt-3'>
                                 <div class='card-body'>
                                     <div class='card-title font-weight-bold text-center my-auto'>" . $video['nome'] . "</div>
                                 </div>
