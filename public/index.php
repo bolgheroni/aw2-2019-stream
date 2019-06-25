@@ -29,15 +29,15 @@
                 if(!$_POST){
                     echo"<div class='form-group mx-auto text-center'>
                         <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
-                        <input type='password' class='form-control mb-3' name='password' placeholder='Senha'>
+                        <input type='password' class='form-control mb-3' name='senha' placeholder='Senha'>
                         <button type='submit' class='text-white btn btn-outline-primary w-100 mb-3'>Entrar</button>
                     </div>";
                 } else {
                     $usuarioDao = require '../back/UsuariosDAO.php';
-                    if($usuarioDao['autenticarUsuario']($_POST['email'], $_POST['password']) == false){
+                    if($usuarioDao['autenticarUsuario']($_POST['email'], $_POST['senha']) == false){
                         echo"<div class='form-group mx-auto text-center'>
                             <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
-                            <input type='password' class='form-control mb-3' name='password' placeholder='Senha'>
+                            <input type='password' class='form-control mb-3' name='senha' placeholder='Senha'>
                             <button type='submit' class='text-white btn btn-outline-primary w-100 mb-3'>Entrar</button>
                             <p class='text-danger mt-3'>Registro não existente</p>
                         </div>";
