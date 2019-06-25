@@ -124,6 +124,12 @@ function autenticarUsuario($email, $senha){
         return false;
     }
 }
+function desautenticarUsuario(){
+    setcookie('userName', null);                
+    setcookie('userId', null);                
+    setcookie('userPermission', null);    
+    return true;            
+}
 
 function adicionarVetorUsuarios($vetor){
     foreach($vetor as $user){
@@ -178,6 +184,7 @@ return [
     'listarUsuarios' => 'listarUsuarios', 
     'buscarUsuarioPorId' => 'buscarUsuarioPorId',
     'autenticarUsuario' => 'autenticarUsuario',
+    'desautenticarUsuario' => 'desautenticarUsuario',
     'editarUsuario' => 'editarUsuario',
     'removerUsuario' => 'removerUsuario',
     'buscarUsuarioPorEmail' => 'buscarUsuarioPorEmail'

@@ -28,6 +28,9 @@ echo "<br>";
 echo "AUTENTICAR <br>";
 echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345678")).'<br>';
 echo json_encode($userDao['autenticarUsuario']('joao@gmail.com', "12345671")).'<br>';
+echo "<br>";
+echo "DESAUTENTICAR <br>";
+echo json_encode($userDao['desautenticarUsuario']()).'<br>';
 
 echo "<br><br>VIDEOS <br><br>";
 echo "ADICIONAR <br>";
