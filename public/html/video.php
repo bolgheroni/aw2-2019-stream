@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+    $videosDao = require '../../back/VideosDAO.php';
+    $videosDao['adicionarVisualizacao']($_GET['idVideo']); 
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
