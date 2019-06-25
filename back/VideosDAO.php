@@ -1,5 +1,7 @@
 <?php
-$GLOBALS['categorias'] = require $_SERVER['DOCUMENT_ROOT']. "/aw2-2019-stream" . "/back/model/". "categorias.php";
+if(!$GLOBALS['categorias']){
+    $GLOBALS['categorias'] = require $_SERVER['DOCUMENT_ROOT']. "/aw2-2019-stream" . "/back/model/". "categorias.php";
+}
 $GLOBALS['caminhoVideos'] = $_SERVER['DOCUMENT_ROOT']. "/aw2-2019-stream" . "/back/model/". "videos.csv";
 
 $GLOBALS['adicionarVideo'] = function($ar){
