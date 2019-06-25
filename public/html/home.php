@@ -31,7 +31,7 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
 
                     $usuario = $usuarioDao['buscarUsuarioPorId']($_COOKIE['userId']);
                     if ($usuario != false) {
-                        if ($usuario['ehAdm'] == true) {
+                        if ($usuario['ehAdm'] == 'true') {
                             echo "<a class='btn btn-outline-primary text-white mt-3' href='admin.php'>Admin</a>";
                         }
                     }
@@ -183,10 +183,8 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
 
     <script type="text/javascript">
         function sair(){
-            <?php 
-                $usuarioDao['desautenticarUsuario']();
-                header("Location:../index.php");    
-            ?>
+
+            window.location.href = "../index.php";
         }
 
     </script>

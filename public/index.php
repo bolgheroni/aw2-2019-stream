@@ -1,7 +1,6 @@
 <?php 
-    if(isset($_COOKIE['userId'])){
-        header("Location:../public/html/home.php");
-    }
+    $usuarioDao = require '../back/UsuariosDAO.php';
+    $usuarioDao['desautenticarUsuario']();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +32,6 @@
                         <button type='submit' class='text-white btn btn-outline-primary w-100 mb-3'>Entrar</button>
                     </div>";
                 } else {
-                    $usuarioDao = require '../back/UsuariosDAO.php';
                     if($usuarioDao['autenticarUsuario']($_POST['email'], $_POST['senha']) == false){
                         echo"<div class='form-group mx-auto text-center'>
                             <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
