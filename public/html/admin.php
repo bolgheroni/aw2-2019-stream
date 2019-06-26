@@ -87,7 +87,7 @@ $dataPoints = array(
                         for ($i = 1; $i <= 6; $i++) {
                             echo "<option value=" . $i . ">" . $categoriaDao['buscarCategoriaPorId']($i) . "</option>";
                         }
-                        echo "</div>";
+                        echo "</select></div>";
                         echo "<button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar Vídeo</button>
                         </div>";
                     } else {
@@ -138,7 +138,6 @@ $dataPoints = array(
                 <!-- -------------------------Nomeação de Admin----------------------------- -->
                 <!-- ----------------------------------------------------------------------- -->
                 <div class=" text-center mx-auto text-light">
-                    <img width="35%" class="mt-5" src="../img/logo.png">
                     <h1 class="mt-4 mb-4">Nomeie outro Administrador</h1>
                 </div>
 
