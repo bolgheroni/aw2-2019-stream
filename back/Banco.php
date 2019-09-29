@@ -4,7 +4,7 @@ class Banco{
     private $host = "localhost";
     private $username = "root";
     private $password = "123456";
-    private $database = "fetnlix";
+    private $database = "dbfetnlix";
     private $conexao = null; 
 
     public function __construct()
@@ -17,13 +17,22 @@ class Banco{
         return $this->conexao;
     }
 
-    private function conect() 
+    public function conect() 
     {
         $this->conexao = mysqli_connect(
                   $this->host, 
                   $this->username, 
                   $this->password, 
                   $this->database);
+        if(!$this->conexao){
+            die('Connect Error: ' . mysqli_connect_error());
+        }else{
+            echo 'Connected!';
+        }
+    }
+    public function disconect() 
+    {
+        mysqli_close($this->conexao);
     }
 
 }
