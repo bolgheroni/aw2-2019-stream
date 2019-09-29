@@ -18,12 +18,12 @@
             "VALUES('".$username."', '".$email."', '".$senha."', '".$ehAdm."')";
             $result = mysqli_query($this->db->getConection(), $cmd);
             if ($result == true) {
-                echo"Inser��o com sucesso!";
+                echo"Inserção com sucesso!";
                 $this->db->disconect();
                 return true;
             } else {
                 $err = mysqli_error($this->db->getConection());
-                echo "Falha na inser��o! Erro: .".$err;
+                echo "Falha na inserção! Erro: .".$err;
                 $this->db->disconect();
                 return false;
             }
