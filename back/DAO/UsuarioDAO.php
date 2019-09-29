@@ -153,8 +153,19 @@
         
 
 
-        function autenticarUsuario(){
-
+        function autenticarUsuario($username, $senha){
+            $this->db->conect();
+            $cmd = 'SELECT * from usuario WHERE username=\''.$username .'\' AND senha=\''.$senha.'\';';
+            $query = mysqli_query($this->db->getConection(), $cmd);
+            $result = mysqli_fetch_assoc($query);
+            if ($query) {
+                $this->db->disconect();
+                return $result;
+            } else {
+                $err = mysqli_error($this->db->getConection());
+                $this->db->disconect();
+                return $err;
+            }
         }
     }
 ?>
