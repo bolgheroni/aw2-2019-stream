@@ -60,7 +60,7 @@ $favoritosDao = new FavoritoDAO();
                 } else {
                     foreach ($videoDao->listarVideos() as $video) {
                         echo "<div class='col-sm-6 col-md-4 col-xl-3'>
-                        <a href='video.php?nome=" . $video->getNome() . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=" . $video['id'] . "' class='card w-100 mt-3'>
+                        <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=" . $video['id'] . "' class='card w-100 mt-3'>
                             <div class='card-body'>
                                 <div class='card-title font-weight-bold text-center my-auto'>" . $video['nome'] . "</div>
                             </div>
@@ -85,15 +85,15 @@ $favoritosDao = new FavoritoDAO();
                 $assitirListados = array();
 
                 foreach ($assistirDao->listarAssistirMaisTarde() as $video) {
-                    if ($video['fk_usuario'] == $_COOKIE['userId']) {
+                    if ($video['usuario'] == $_COOKIE['userId']) {
                         $existeAssistir = true;
-                        $assistirListados[] = $video['fk_video'];
+                        $assistirListados[] = $video['video'];
                     }
                 }
 
                 if ($existeAssistir == true) {
                     foreach ($assistirListados as $idVideo) {
-                        $video = $videoDao['buscarVideoPorId']($idVideo);
+                        $video = $videoDao('buscarVideoPorId')($idVideo);
                         echo "<div class='col-sm-6 col-md-4 col-xl-3'>
                             <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=" . $video['id'] . "' class='card w-100 mt-3'>
                                 <div class='card-body'>
@@ -119,15 +119,15 @@ $favoritosDao = new FavoritoDAO();
     for ($i = 1; $i <= 6; $i++) {
 
         echo "<div class='col-md-10 text-white mx-auto mt-5'>
-        <h2>" . $categoriaDao['buscarCategoriaPorId']($i) . "</h2>
+        <h2>" . $categoriaDao('buscarCategoriaPorId')($i) . "</h2>
         <div class='row mt-2'>
             <div class='d-flex flex-wrap w-100'>";
 
 
-        if (count($videoDao['videosPorCategoria']($i)) == 0) {
+        if (count($videoDao('videosPorCategoria')($i)) == 0) {
             echo "<p class='text-white ml-5'>Não há vídeos nessa categoria ainda</p>";
         } else {
-            foreach ($videoDao['videosPorCategoria']($i) as $video) {
+            foreach ($videoDao('videosPorCategoria')($i) as $video) {
                 echo "<div class='col-sm-6 col-md-4 col-xl-3'>
                             <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=" . $video['id'] . "' class='card w-100 mt-3'>
                                 <div class='card-body'>
@@ -157,16 +157,16 @@ $favoritosDao = new FavoritoDAO();
                 $existeFavoritos = false;
                 $favoritosListados = array();
 
-                foreach ($favoritosDao['listarFavoritos']() as $video) {
-                    if ($video['fk_usuario'] == $_COOKIE['userId']) {
+                foreach ($favoritosDao('listarFavoritos')() as $video) {
+                    if ($video['usuario'] == $_COOKIE['userId']) {
                         $existeFavoritos = true;
-                        $favoritosListados[] = $video['fk_video'];
+                        $favoritosListados[] = $video['video'];
                     }
                 }
 
                 if ($existeFavoritos == true) {
                     foreach ($favoritosListados as $idVideo) {
-                        $video = $videoDao['buscarVideoPorId']($idVideo);
+                        $video = $videoDao('buscarVideoPorId')($idVideo);
                         echo "<div class='col-sm-6 col-md-4 col-xl-3'>
                             <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=" . $video['id'] . "' class='card w-100 mt-3'>
                                 <div class='card-body'>
