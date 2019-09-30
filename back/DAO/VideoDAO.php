@@ -121,6 +121,14 @@
             }
         }
 
+        function visualizacaoPorCategoria($idCategoria){
+            foreach(videosPorCategoria($idCategoria) as $video){
+                $visualizacoes += $video-> getVisualizacao();
+            }
+
+            return $visualizacoes;
+        }
+
         function adicionarVisualizacao($idVideo){
             $video = buscarVideoPorId($idVideo);
 
