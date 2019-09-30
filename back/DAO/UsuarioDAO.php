@@ -150,15 +150,17 @@
             // mysqli_stmt_fecth($stmt);
         }
 
-        function autenticarUsuario($email, $senha){
+        public function autenticarUsuario($email, $senha){
             $this->db->conect();
             $cmd = 'SELECT * from usuario WHERE email=\''.$email .'\' AND senha=\''.$senha.'\';';
             $query = mysqli_query($this->db->getConection(), $cmd);
             $result = mysqli_fetch_assoc($query);
             if ($query) {
-                setcookie('userName', $result['username']);                
-                setcookie('userId', $result['id']);                
-                setcookie('userPermission', $result['ehAdm']);      
+                if($result){
+                    setcookie('userName', $result['username']);                
+                    setcookie('userId', $result['id']);                
+                    setcookie('userPermission', $result['ehAdm']);      
+                }
                 $this->db->disconect();
                 return $result;
             } else {
@@ -168,7 +170,7 @@
             }
         }
         
-        function desautenticarUsuario(){
+        public function desautenticarUsuario(){
             setcookie('userName', null);                
             setcookie('userId', null);                
             setcookie('userPermission', null);    
