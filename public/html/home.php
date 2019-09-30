@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-$usuarioDao = require '../../back/UsuariosDAO.php';
-$videoDao = require '../../back/VideosDAO.php';
-$assistirDao = require '../../back/AssistirMaisTardeDAO.php';
-$categoriaDao = require '../../back/model/categorias.php';
-$favoritosDao = require '../../back/FavoritosDAO.php';
+require_once '../../back/DAO/UsuarioDAO.php';
+$usuarioDao = new UsuarioDAO();
+require_once '../../back/DAO/VideoDAO.php';
+$videoDao = new VideoDAO();
+require_once '../../back/DAO/AssistirMaisTardeDAO.php';
+$assistirDao = new AssistirMaisTardeDAO();
+require_once '../../back/DAO/CategoriaDAO.php';
+$categoriaDao = new CategoriaDAO();
+require_once '../../back/DAO/FavoritoDAO.php';
+$favoritosDao = new FavoritoDAO();
 ?>
 
 <head>
@@ -29,7 +34,7 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
                     <a class="btn btn-outline-primary text-white mt-3" href="#favoritos">Favoritos</a>
                     <?php
 
-                    $usuario = $usuarioDao['buscarUsuarioPorId']($_COOKIE['userId']);
+                    $usuario = $usuarioDao->buscarUsuarioPorId($_COOKIE['userId']);
                     if ($usuario != false) {
                         if ($usuario['ehAdm'] == 'true') {
                             echo "<a class='btn btn-outline-primary text-white mt-3' href='admin.php'>Admin</a>";
@@ -50,12 +55,12 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
             <div class="d-flex flex-wrap w-100">
 
                 <?php
-                if (count($videoDao['listarVideos']()) == 0) {
+                if (count($videoDao->listarVideos()) == 0) {
                     echo "<p class='text-white ml-5'>Não há vídeos ainda</p>";
                 } else {
-                    foreach ($videoDao['listarVideos']() as $video) {
+                    foreach ($videoDao->listarVideos() as $video) {
                         echo "<div class='col-sm-6 col-md-4 col-xl-3'>
-                        <a href='video.php?nome=" . $video['nome'] . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=" . $video['id'] . "' class='card w-100 mt-3'>
+                        <a href='video.php?nome=" . $video->getNome() . "&link=" . $video['link'] . "&visualizacoes=" . $video['visualizacoes'] . "&idVideo=" . $video['id'] . "' class='card w-100 mt-3'>
                             <div class='card-body'>
                                 <div class='card-title font-weight-bold text-center my-auto'>" . $video['nome'] . "</div>
                             </div>
@@ -79,7 +84,7 @@ $favoritosDao = require '../../back/FavoritosDAO.php';
                 $existeAssistir = false;
                 $assitirListados = array();
 
-                foreach ($assistirDao['listarAssistirMaisTarde']() as $video) {
+                foreach ($assistirDao->listarAssistirMaisTarde() as $video) {
                     if ($video['fk_usuario'] == $_COOKIE['userId']) {
                         $existeAssistir = true;
                         $assistirListados[] = $video['fk_video'];

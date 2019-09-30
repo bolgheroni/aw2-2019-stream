@@ -2,7 +2,7 @@
     require_once($_SERVER['DOCUMENT_ROOT']. "/aw2-2019-stream/back/model/Video.php");
     require_once($_SERVER['DOCUMENT_ROOT']. "/aw2-2019-stream/back/Banco.php");
 
-    class FavoritoDAO{
+    class VideoDAO{
         private $db;
         public function __construct(){
             $this->db = new Banco();

@@ -160,7 +160,7 @@
             $result = mysqli_fetch_assoc($query);
             if ($query) {
                 $this->db->disconect();
-                return $result;
+                return true;
             } else {
                 $err = mysqli_error($this->db->getConection());
                 $this->db->disconect();

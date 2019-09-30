@@ -31,10 +31,13 @@
                             <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
                         </div>";
                         } else {
-                            $userDao = require '../../back/UsuariosDAO.php' ;
+                            require_once './../../back/DAO/UsuarioDAO.php' ;
+                            require_once './../../back/model/Usuario.php';
+                            $usuarioDAO = new UsuarioDAO();
+                            $usuario = new Usuario($_POST['user'], $_POST['email'], $_POST['password'], 'false');
                             if(!(is_null($_POST['email']) || is_null($_POST['user']) || is_null($_POST['password']))
-                            && $userDao['adicionarUsuario']($_POST['email'], $_POST['user'], $_POST['password'], 'false')){
-                                header("Location:../index.php");
+                            && $usuarioDAO->adicionarUsuario($usuario)){
+                                header("Location:./../../index.php");
                             } else {
                                 echo "<div class='form-group mx-auto text-center'>
                                 <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
