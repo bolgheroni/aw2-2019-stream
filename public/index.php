@@ -32,7 +32,7 @@
                         <button type='submit' class='text-white btn btn-outline-primary w-100 mb-3'>Entrar</button>
                     </div>";
                 } else {
-                    if($usuarioDao['autenticarUsuario']($_POST['email'], $_POST['senha']) == false){
+                    if($usuarioDao('autenticarUsuario')($_POST['email'], $_POST['senha']) == false){
                         echo"<div class='form-group mx-auto text-center'>
                             <input type='email' class='form-control mt-5 mb-3' name='email' placeholder='E-mail'>
                             <input type='password' class='form-control mb-3' name='senha' placeholder='Senha'>

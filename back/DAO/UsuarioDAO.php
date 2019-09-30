@@ -150,9 +150,9 @@
             // mysqli_stmt_fecth($stmt);
         }
 
-        function autenticarUsuario($username, $senha){
+        function autenticarUsuario($email, $senha){
             $this->db->conect();
-            $cmd = 'SELECT * from usuario WHERE username=\''.$username .'\' AND senha=\''.$senha.'\';';
+            $cmd = 'SELECT * from usuario WHERE email=\''.$email .'\' AND senha=\''.$senha.'\';';
             $query = mysqli_query($this->db->getConection(), $cmd);
             $result = mysqli_fetch_assoc($query);
             if ($query) {
