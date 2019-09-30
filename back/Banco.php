@@ -3,7 +3,7 @@ class Banco{
 
     private $host = "localhost";
     private $username = "root";
-    private $password = "";
+    private $password = "123456";
     private $database = "dbfetnlix";
     private $conexao = null; 
 
@@ -26,8 +26,6 @@ class Banco{
                   $this->database);
         if(!$this->conexao){
             die('Connect Error: ' . mysqli_connect_error());
-        }else{
-            echo 'Connected!';
         }
     }
     public function disconect() 

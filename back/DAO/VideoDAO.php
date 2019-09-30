@@ -49,7 +49,7 @@
             
         }
 
-        function buscarVideoId($id){
+        function buscarVideoPorId($id){
             $this->db->conect();
             $cmd = "SELECT * from video WHERE id=".$id.";";
             $query = mysqli_query($this->db->getConection(), $cmd);
@@ -110,12 +110,12 @@
             $this->db->conect();
             $cmd = "SELECT * from video WHERE idCategoria=".$idCategoria.";";
             $query = mysqli_query($this->db->getConection(), $cmd);
-            $result = mysqli_fetch_assoc($query);
+            $result = mysqli_fetch_all($query, MYSQLI_ASSOC);;
             if ($query) {
                 $this->db->disconect();
                 return $result;
             } else {
-                $err = mysqli_error($$this->db->getConection());
+                $err = mysqli_error($this->db->getConection());
                 $this->db->disconect();
                 return $err;
             }
