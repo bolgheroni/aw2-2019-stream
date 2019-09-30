@@ -8,7 +8,7 @@
             $this->db = new Banco();
         }
         
-        function adicionarVideo(Favorito $video){
+        function adicionarVideo(Video $video){
             $nome = $video->getNome();
             $link = $video->getLink();
             $visualizacoes = $video->getVisualizacoes();
