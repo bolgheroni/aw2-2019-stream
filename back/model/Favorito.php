@@ -5,28 +5,28 @@ class Favorito {
     private $usuario;
 
     function __construct($id, $video, $usuario){
-        $this->$id = $id;
-        $this->$video = $video;
-        $this->$usuario = $usuario;
+        $this->id = $id;
+        $this->video = $video;
+        $this->usuario = $usuario;
     }
 
     public function getId(){
-        return $this->$id;
+        return $this->id;
     }
     public function getVideo(){
-        return $this->$video;
+        return $this->video;
     }
     public function getUsuario(){
-        return $this->$usuario;
+        return $this->usuario;
     }
     public function setId($id){
-        $this->$id = $id;
+        $this->id = $id;
     }
     public function setVideo($video){
-        $this->$video = $video;
+        $this->video = $video;
     }
     public function setUsuario($usuario){
-        $this->$usuario = $usuario;
+        $this->usuario = $usuario;
     }
 }
 
