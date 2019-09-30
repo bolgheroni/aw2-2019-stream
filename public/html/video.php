@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-    $videosDao = require '../../back/VideosDAO.php';
-    $videosDao['adicionarVisualizacao']($_GET['idVideo']); 
-?>
 
 <head>
     <meta charset="UTF-8">
@@ -41,15 +37,17 @@
     <script type="text/javascript">
         function adicionarFavorito(){
             <?php 
-                $favoritoDao = require '../../back/FavoritosDAO.php';
-                $favoritoDao['adicionarFavorito']($_COOKIE['userId'], $_GET['idVideo']);    
+                require_once '../../back/DAO/FavoritoDAO.php';
+                $favoritoDao = new FavoritoDAO();
+                $favoritoDao->adicionarFavorito($_COOKIE['userId'], $_GET['idVideo']);  
             ?>
         }
 
         function adicionarFavorito(){
             <?php 
-                $assistirMaisTardeDao = require '../../back/AssistirMaisTardeDAO.php';
-                $assistirMaisTardeDao['adicionarAssistirMaisTarde']($_COOKIE['userId'], $_GET['idVideo']);    
+                require_once '../../back/DAO/AssitirMaisTardeDAO.php';
+                $assistir = new AssistirMaisTardeDAO();
+                $assistir->adicionarFavorito($_COOKIE['userId'], $_GET['idVideo']);    
             ?>
         }
     </script>
