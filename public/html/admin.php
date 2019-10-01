@@ -7,7 +7,7 @@ $acao = $videoDao->visualizacoesPorCategoria(2);
 $aventura = $videoDao->visualizacoesPorCategoria(3);
 $comedia = $videoDao->visualizacoesPorCategoria(4);
 $drama = $videoDao->visualizacoesPorCategoria(5);
-$romance = $videoDao->visualizacoesPorCategoria(6);
+$romance = $videoDao->visualizacoesPorCategoria(0);
 
 $dataPoints = array(
     array("label" => "Terror", "y" => $terror),
@@ -84,10 +84,10 @@ $dataPoints = array(
                         <div class='form-group'>
                         <select class='form-control' name='categoria'>";
 
-                        require '../../back/model/categorias.php';
+                        require '../../back/DAO/CategoriaDAO.php';
                         $categoriaDao = new CategoriaDAO(); 
-                        for ($i = 1; $i <= 6; $i++) {
-                            echo "<option value=" . $i . ">" . $categoriaDao['buscarCategoriaPorId']($i) . "</option>";
+                        for ($i = 0; $i < 6; $i++) {
+                            echo "<option value=" . $i . ">" . $categoriaDao->buscarCategoriaPorId($i)['nome'] . "</option>";
                         }
                         echo "</select></div>";
                         echo "<button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar Vídeo</button>
@@ -108,7 +108,7 @@ $dataPoints = array(
 
                             require '../../back/DAO/CategoriaDAO.php';
                             $categoriaDao = new CategoriaDAO();
-                            for ($i = 1; $i <= 6; $i++) {
+                            for ($i = 0; $i < 6; $i++) {
                                 echo "<option value=" . $i . ">" . $categoriaDao->buscarCategoriaPorId($i)['name'] . "</option>";
                             }
                             echo "</div>";
@@ -124,9 +124,9 @@ $dataPoints = array(
                             <div class='form-group'>
                             <select class='form-control' name='categoria'>";
 
-                            require '../../back/model/categorias.php';
+                            require '../../back/DAO/CategoriaDAO.php';
                             $categoriaDao = new CategoriaDAO();
-                            for ($i = 1; $i <= 6; $i++) {
+                            for ($i = 0; $i < 6; $i++) {
                                 echo "<option value=" . $i . ">" . $categoriaDao->buscarCategoriaPorId($i)['name'] . "</option>";
                             }
                             echo "</div>";
