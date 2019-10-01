@@ -1,12 +1,13 @@
 <?php
-$videoDao = require '../../back/VideosDAO.php';
+require '../../back/DAO/VideoDAO.php';
+$videoDao = new VideoDAO();
 
-$terror = $videoDao['visualizacoesPorCategoria'](1);
-$acao = $videoDao['visualizacoesPorCategoria'](2);
-$aventura = $videoDao['visualizacoesPorCategoria'](3);
-$comedia = $videoDao['visualizacoesPorCategoria'](4);
-$drama = $videoDao['visualizacoesPorCategoria'](5);
-$romance = $videoDao['visualizacoesPorCategoria'](6);
+$terror = $videoDao->visualizacoesPorCategoria(1);
+$acao = $videoDao->visualizacoesPorCategoria(2);
+$aventura = $videoDao->visualizacoesPorCategoria(3);
+$comedia = $videoDao->visualizacoesPorCategoria(4);
+$drama = $videoDao->visualizacoesPorCategoria(5);
+$romance = $videoDao->visualizacoesPorCategoria(6);
 
 $dataPoints = array(
     array("label" => "Terror", "y" => $terror),
@@ -83,7 +84,8 @@ $dataPoints = array(
                         <div class='form-group'>
                         <select class='form-control' name='categoria'>";
 
-                        $categoriaDao = require '../../back/model/categorias.php';
+                        require '../../back/model/categorias.php';
+                        $categoriaDao = new CategoriaDAO(); 
                         for ($i = 1; $i <= 6; $i++) {
                             echo "<option value=" . $i . ">" . $categoriaDao['buscarCategoriaPorId']($i) . "</option>";
                         }
@@ -91,10 +93,11 @@ $dataPoints = array(
                         echo "<button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar Vídeo</button>
                         </div>";
                     } else {
-                        $videoDao = require '../../back/VideosDAO.php';
+                        require '../../back/DAO/VideoDAO.php';
+                        $videoDao = new VideoDAO();
                         if (
                             !(is_null($_POST['nome']) || is_null($_POST['link']) || is_null($_POST['categoria']))
-                            && $videoDao['adicionarVideo']($_POST['nome'], $_POST['link'], 0, $_POST['categoria'])
+                            && $videoDao->adicionarVideo($_POST['nome'], $_POST['link'], 0, $_POST['categoria'])
                         ) {
                             echo "<div class='form-group mx-auto text-center'>
                             <input type='text' class='form-control mt-5 mb-3' name='nome' placeholder='Nome do Vídeo'>
@@ -103,9 +106,10 @@ $dataPoints = array(
                             <div class='form-group'>
                             <select class='form-control' name='categoria'>";
 
-                            $categoriaDao = require '../../back/model/categorias.php';
+                            require '../../back/DAO/CategoriaDAO.php';
+                            $categoriaDao = new CategoriaDAO();
                             for ($i = 1; $i <= 6; $i++) {
-                                echo "<option value=" . $i . ">" . $categoriaDao['buscarCategoriaPorId']($i) . "</option>";
+                                echo "<option value=" . $i . ">" . $categoriaDao->buscarCategoriaPorId($i)['name'] . "</option>";
                             }
                             echo "</div>";
                             echo "<button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar Vídeo</button>
@@ -120,9 +124,10 @@ $dataPoints = array(
                             <div class='form-group'>
                             <select class='form-control' name='categoria'>";
 
-                            $categoriaDao = require '../../back/model/categorias.php';
+                            require '../../back/model/categorias.php';
+                            $categoriaDao = new CategoriaDAO();
                             for ($i = 1; $i <= 6; $i++) {
-                                echo "<option value=" . $i . ">" . $categoriaDao['buscarCategoriaPorId']($i) . "</option>";
+                                echo "<option value=" . $i . ">" . $categoriaDao->buscarCategoriaPorId($i)['name'] . "</option>";
                             }
                             echo "</div>";
                             echo "<button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar Vídeo</button>
@@ -150,11 +155,12 @@ $dataPoints = array(
                             <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
                             </div>";
                     } else {
-                        $userDao = require '../../back/UsuariosDAO.php';
+                        require '../../back/DAO/UsuarioDAO.php';
+                        $userDao = new UsuarioDAO(); 
                         if (!(is_null($_POST['email']))) {
-                            if ($userDao['buscarUsuarioPorEmail']($_POST['email']) != false) {
-                                $usuario = $userDao['buscarUsuarioPorEmail']($_POST['email']);
-                                $userDao['editarUsuario']($usuario['id'], $usuario['email'], $usuario['username'], $usuario['senha'], true);
+                            if ($userDao->buscarUsuarioPorEmail($_POST['email']) != false) {
+                                $usuario = $userDao->buscarUsuarioPorEmail($_POST['email']);
+                                $userDao->editarUsuario($usuario['id'], $usuario['email'], $usuario['username'], $usuario['senha'], true);
                                 echo "<div class='form-group mx-auto text-center'>
                                     <input type='email' class='form-control mt-5 mb-3' name='user' placeholder='E-mail do novo administrador'>
                                     <button type='submit' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>

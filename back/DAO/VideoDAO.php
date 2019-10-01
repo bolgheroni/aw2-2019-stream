@@ -121,9 +121,10 @@
             }
         }
 
-        function visualizacaoPorCategoria($idCategoria){
-            foreach(videosPorCategoria($idCategoria) as $video){
-                $visualizacoes += $video-> getVisualizacao();
+        function visualizacoesPorCategoria($idCategoria){
+            $visualizacoes = 0;
+            foreach($this->videosPorCategoria($idCategoria) as $video){
+                $visualizacoes += $video["visualizacoes"];
             }
 
             return $visualizacoes;
