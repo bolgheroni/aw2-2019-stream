@@ -24,7 +24,7 @@
                     <div class="col-md-6">
                         <div class="btn-group mt-5 d-flex flex-row" role="group" aria-label="Basic example">
                             <button onclick="adicionarFavorito()" type="button" class="btn btn-outline-primary text-white">Favorito</button>
-                            <button type="button" class="btn btn-outline-primary text-white">Assistir mais tarde</button>
+                            <button onclick="adicionarAssistirMaisTarde()" type="button" class="btn btn-outline-primary text-white">Assistir mais tarde</button>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -38,16 +38,22 @@
         function adicionarFavorito(){
             <?php 
                 require_once '../../back/DAO/FavoritoDAO.php';
+                require_once '../../back/model/Favorito.php';
+                echo $_COOKIE['userId'].",";
+                echo $_GET['idVideo'];
+                $favorito = new Favorito($_COOKIE['userId'], $_GET['idVideo']);
                 $favoritoDao = new FavoritoDAO();
-                $favoritoDao->adicionarFavorito($_COOKIE['userId'], $_GET['idVideo']);  
+                $favoritoDao->adicionarFavorito($favorito);  
             ?>
         }
 
-        function adicionarFavorito(){
+        function adicionarAssistirMaisTarde(){
             <?php 
                 require_once '../../back/DAO/AssitirMaisTardeDAO.php';
-                $assistir = new AssistirMaisTardeDAO();
-                $assistir->adicionarFavorito($_COOKIE['userId'], $_GET['idVideo']);    
+                require_once '../../back/model/AssistirMaisTarde.php';
+                $assistir = new AssistirMaisTarde($_COOKIE['userId'], $_GET['idVideo']);
+                $assistirDao = new AssistirMaisTardeDAO();
+                $assistirDao->adicionarAssistirMaisTarde($assistir);    
             ?>
         }
     </script>

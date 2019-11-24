@@ -9,15 +9,12 @@
         }
         
         function adicionarFavorito(Favorito $favorito){
-            $usuario = $favorito->getUsuario();
-            $video = $favorito->getVideo();
+            
+            $idUsuario = $favorito->getUsuario();
+            $idVideo = $favorito->getVideo();
 
-            $idUsuario = $usuario->getId();
-            $idVideo = $video->getId();
-
-            $this->db->conect();
-            $cmd = "INSERT INTO favorito(idVideo,idUsuario) ".
-            "VALUES('".$idVideo."', '".$idUsuario."')";
+            //$this->db->conect();
+            $cmd = "INSERT INTO favorito(idVideo,idUsuario) VALUES(".$idVideo.",".$idUsuario.");";
             $result = mysqli_query($this->db->getConection(), $cmd);
             if ($result == true) {
                 echo"Inserção com sucesso!";

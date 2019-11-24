@@ -4,8 +4,7 @@ class AssistirMaisTarde {
     private $video;
     private $usuario;
 
-    function __construct($id, $video, $usuario){
-        $this->id = $id;
+    function __construct($video, $usuario){
         $this->video = $video;
         $this->usuario = $usuario;
     }
