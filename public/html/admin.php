@@ -140,6 +140,13 @@ $dataPoints = array(
                 </form>
 
                 <!-- ----------------------------------------------------------------------- -->
+                <!-- -------------------------Cadastrar vários vídeos----------------------- -->
+                <!-- ----------------------------------------------------------------------- -->
+                    
+                <h1 class="mt-4 mb-4 text-white">Cadastrar vários vídeos</h1>
+                <button onclick="cadastrarVideos()" type='button' class='text-white btn btn-outline-primary w-100'>Cadastrar</button>
+
+                <!-- ----------------------------------------------------------------------- -->
                 <!-- -------------------------Nomeação de Admin----------------------------- -->
                 <!-- ----------------------------------------------------------------------- -->
                 <div class=" text-center mx-auto text-light">
@@ -193,6 +200,31 @@ $dataPoints = array(
         <h1 class="mt-4 mb-4">Visualizações por Categoria</h1>
     </div>
     <div id="chartContainer" class="mb-4"></div>
+    
+    <script type="text/javascript">
+        function cadastrarVideos(){
+            <?php
+                require_once '../../back/DAO/VideoDAO.php';
+                require_once '../../back/model/Video.php';
+                $videoDao = new VideoDAO();
+
+
+                $API_key = 'AIzaSyA0RUI63BT1hCa7QDj05fxjbFy59n6SM14';
+                $channelID = 'UC2eb58Gxb613nJDjpuwWmgg';
+                $maxResults = 20;
+
+                $videoList = json_decode(file_get_contents('https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId='.$channelID.'&maxResult='.$maxResults.'&key='.$API_key.''));
+
+                foreach($videoList->items as $item){
+                    if(isset($item->id->videoId)){
+                        $video = new Video($item->snippet->title, 'https://www.youtube.com/embed/'.$item->id->videoId, 0, 7);
+                        $videoDao->adicionarVideo($video);
+                    }
+                }
+            ?>
+        }
+    </script>
+
 </body>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 

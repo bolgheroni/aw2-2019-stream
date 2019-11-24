@@ -7,8 +7,7 @@ class Video {
     private $visualizacoes;
     private $categoria;
 
-    function __construct($id, $nome, $link, $visualizacoes, $categoria){
-        $this->id = $id;
+    function __construct($nome, $link, $visualizacoes, $categoria){
         $this->nome = $nome;
         $this->link = $link;
         $this->visualizacoes = $visualizacoes;
