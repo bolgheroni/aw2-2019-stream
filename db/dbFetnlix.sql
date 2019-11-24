@@ -54,6 +54,7 @@ INSERT INTO categoria(nome) VALUES ('Ação');
 INSERT INTO categoria(nome) VALUES ('Esportes');
 INSERT INTO categoria(nome) VALUES ('Música');
 INSERT INTO categoria(nome) VALUES ('Documentários');
+INSERT INTO categoria(nome) VALUES ('Trailer');
 
 -- Volume de dados: Vídeos
 INSERT INTO video(nome, link, visualizacoes, idCategoria) VALUES ('O Rappa - Pescador de Ilusões', 'https://www.youtube.com/watch?v=1kX9t-SZd38', 0, 5);
